@@ -1,0 +1,107 @@
+PROBLEMS I LIKED AND COULDN'T DO 
+--------------------------------
+
+1641. Count Sorted Vowel Strings
+
+	Given an integer n, return the number of strings of length n that consist only of vowels (a, e, i, o, u) and are lexicographically sorted.
+
+	x - Initially you have 5 available vowels to start with
+	n - Length of string you can form
+
+	As you recurr, you have only two options:
+	Choose to decrease the x keeping n same
+	Choose to decrease the n keeping x same
+
+	int f(int x, int n){
+	    if(n==1)
+	        return x;
+	    if(x<=0)
+	        return 0;
+	    return f(x-1, n) + f(x, n-1);
+	}
+	int countVowelStrings(int n) {
+	    return f(5, n);
+	}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+1043. Partition Array for Maximum Sum
+
+	Given an integer array arr, you should partition the array into (contiguous) subarrays of length at most k. After partitioning, each subarray has their values changed to become the maximum value of that subarray.
+
+	Return the largest sum of the given array after partitioning.
+
+	For each new element traversed in the array, you want to start looking back at either K steps or however much allows k to move back
+	During that process, keep track of the maximum number for that backtracking segment
+	Using this local segment maximum, compute the segment sum, and compare it as you look back further and further until you reach k or beginning of the array.
+	Using the local segment sum to reach the overall highest sum by finding out the max sum achievable by comparing it with itself
+	
+	int maxSumAfterPartitioning(vector<int>& A, int K) {
+        int N = A.size();
+        vector<int> dp(N);
+        for (int i = 0; i < N; ++i) {
+            int curMax = 0;
+            for (int k = 1; k <= K && i - k + 1 >= 0; ++k) {
+                curMax = max(curMax, A[i - k + 1]);
+                dp[i] = max(dp[i], (i >= k ? dp[i - k] : 0) + curMax * k);
+            }
+        }
+        return dp[N - 1];
+    }
+
+----------------------------------------------------------------------------------------------------------------------
+
+1711. Count Good Meals
+
+	A good meal is a meal that contains exactly two different food items with a sum of deliciousness equal to a power of two.
+	You can pick any two different foods to make a good meal.
+	Given an array of integers deliciousness where deliciousness[i] is the deliciousness of the i​​​​​​th​​​​​​​​ item of food, return the number of different good meals you can make from this list modulo 109 + 7.
+
+	Step 1. Create an Unordered Map
+	Step 2. Initialise the ans=0
+	Step 3. Loop through Each Element in the vector
+	Step 4. For Each Element loot through pow(2,1) to pow(2,22) 
+	Step 5. Find For the element pow(2,i) - x  in the map . If found then make add the frequency.
+	Step 6. Every time add the element of the vector into the map
+	Step7 . Return the ans with modulo
+
+	int countPairs(vector<int>& deliciousness) {
+        unordered_map<int, int> lks;
+        long long ans = 0;
+        for(int it : deliciousness){
+            for(int i=1;i<=(1<<22);i*=2)
+                if(lks.count(i-it)) ans+=lks[i-it];
+            lks[it]+=1;
+        }
+        return ans%(int)(1e9 + 7);
+    }
+
+---------------------------------------------------------------------------------------------------------------------------
+
+983. Minimum Cost For Tickets
+
+	In a country popular for train travel, you have planned some train travelling one year in advance.  The days of the year that you will travel is given as an array days.  Each day is an integer from 1 to 365.
+
+	Train tickets are sold in 3 different ways:
+
+	a 1-day pass is sold for costs[0] dollars;
+	a 7-day pass is sold for costs[1] dollars;
+	a 30-day pass is sold for costs[2] dollars.
+	The passes allow that many days of consecutive travel.  For example, if we get a 7-day pass on day 2, then we can travel for 7 days: day 2, 3, 4, 5, 6, 7, and 8.
+
+	Return the minimum number of dollars you need to travel every day in the given list of days.
+
+	We track the minimum cost for all calendar days in dp. For non-travel days, the cost stays the same as for the previous day. For travel days, it's a minimum of yesterday's cost plus single-day ticket, or cost for 8 days ago plus 7-day pass, or cost 31 days ago plus 30-day pass.
+
+	int mincostTickets(vector<int>& days, vector<int>& costs) {
+	unordered_set<int> travel(begin(days), end(days));
+	  int dp[366] = {};
+	  for (int i = 1; i < 366; ++i) {
+	    if (travel.find(i) == travel.end()) dp[i] = dp[i - 1];
+	    else dp[i] = min({ dp[i - 1] + costs[0], dp[max(0, i - 7)] + costs[1], dp[max(0, i - 30)] + costs[2]});
+	  }
+	  return dp[365];
+	}
+
+---------------------------------------------------------------------------------------------------------------------------
+
