@@ -8,8 +8,6 @@
 // Output: 6
 
 
-
-
 // Intuition and Algorithm --> STACK
 
 // Every position in the string has a depth - some number of matching parentheses surrounding it. For example, the dot in (()(.())) has depth 2, because of these parentheses: (__(.__))
@@ -49,8 +47,6 @@ int scoreOfParentheses(string s)
 
 // Time Complexity: O(N), where NN is the length of S.
 // Space Complexity: O(N), the size of the stack.
-
-
 
 
 // Intuition --> 
