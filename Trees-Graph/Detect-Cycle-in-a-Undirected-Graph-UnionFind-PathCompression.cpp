@@ -53,6 +53,7 @@ int findit(vector<pair<int, int>> &subsets, int x)
 {
     if (subsets[x].first != x)
         subsets[x].first = findit(subsets, subsets[x].first);
+
     return subsets[x].first;
 }
 
@@ -60,10 +61,13 @@ void unionit(vector<pair<int, int>> &subsets, int x, int y)
 {
     int xr = findit(subsets, x);
     int yr = findit(subsets, y);
+
     if (subsets[xr].second < subsets[yr].second)
         subsets[xr].first = yr;
+    
     else if (subsets[xr].second > subsets[yr].second)
         subsets[yr].first = xr;
+    
     else
     {
         subsets[yr].first = xr;
@@ -74,34 +78,44 @@ void unionit(vector<pair<int, int>> &subsets, int x, int y)
 bool isCycle(vector<pair<int, int>> &v)
 {
     vector<pair<int, int>> subsets;
+
     for (int i = 0; i < V; i++)
     {
         subsets.push_back({i, 0});
     }
+    
     for (int i = 0; i < E; i++)
     {
         int a = findit(subsets, v[i].first);
         int b = findit(subsets, v[i].second);
+    
         if (a == b)
             return true;
+    
         unionit(subsets, a, b);
     }
+    
     return false;
 }
 
 int main()
 {
     cin >> E >> V;
+
     vector<pair<int, int>> v;
+    
     int a, b;
+    
     for (int i = 0; i < E; i++)
     {
         cin >> a >> b;
         v.push_back({a, b});
+    
     }
     if (isCycle(v))
         cout << "PRESENT";
     else
         cout << "NOT PRESENT";
+    
     return 0;
 }

@@ -32,7 +32,7 @@ int kp(int wei[], int val[], int W, int n){
                 dp[i][j] = max(val[i-1] + dp[i-1][j-wei[i-1]], dp[i-1][j]);
                 
             else
-                dp[i][j]=dp[i-1][j];
+                dp[i][j]=dp[i-1][j];    
             
         }
     }
