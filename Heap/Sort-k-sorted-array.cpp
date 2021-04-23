@@ -11,7 +11,30 @@
 // #type def pair<int, int> T
 
 
-// --------------------------------------------------------------------------------------------------------------------
+// CUSTOM COMPARATOR OF MAP ---------------------------------------------------------------
+
+typedef pair<string, int> p;
+    
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string, int> m;
+        for(auto it : words) m[it]++;
+        auto comp = [&](const pair<string, int> &p1, const pair<string, int> &p2){
+            return p1.second==p2.second?p1.first<p2.first:p1.second>p2.second;   
+        };
+        priority_queue<p, vector<p>, decltype(comp)> pq(comp);
+        for(auto it : m){
+            pq.push({it.first, it.second});
+            if(pq.size()>k) pq.pop();
+        }
+        vector<string> ans;
+        while(!pq.empty()){
+            ans.insert(ans.begin(), pq.top().first);
+            pq.pop();
+        }
+        return ans;
+    }
+
+// -----------------------------------------------------------------------------------------------
 
 
 // Given an array of n elements, where each element is at most k away from its target position, devise an algorithm that sorts in O(n log k) time. 

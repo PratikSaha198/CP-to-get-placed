@@ -2,6 +2,17 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "*.tcc": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "string": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp"
     }
 }
