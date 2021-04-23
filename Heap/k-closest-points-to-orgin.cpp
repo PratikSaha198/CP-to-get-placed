@@ -10,6 +10,10 @@ typedef pair<double, pair<int, int>> pp;
 
 vector<vector<int>> kClosest(vector<vector<int>>& points, int k)
 {
+
+    // Max heap is needed as the maximum element is stored at the top and that one is deleted
+    // Lastly the k number of least difference is stored.
+    
     priority_queue<pp> pq;
   
     for(auto it : points)

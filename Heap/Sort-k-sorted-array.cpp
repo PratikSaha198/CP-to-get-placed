@@ -18,6 +18,14 @@ typedef pair<string, int> p;
     vector<string> topKFrequent(vector<string>& words, int k) {
         unordered_map<string, int> m;
         for(auto it : words) m[it]++;
+
+        // A structure is essentailly used as a comparator.
+
+        // decltype Keyword
+        // It inspects the declared type of an entity or the type of an expression. 
+        // Auto lets you declare a variable with particular type whereas ...
+        // decltype lets you extract the type from the variable so decltype is sort of an operator that evaluates the type of passed expression. 
+
         auto comp = [&](const pair<string, int> &p1, const pair<string, int> &p2){
             return p1.second==p2.second?p1.first<p2.first:p1.second>p2.second;   
         };
@@ -51,6 +59,9 @@ int main(){
 
     vector<int> nums{10, 9, 8, 7, 4, 70, 60, 50};
     int k = 4;
+
+    // A Min heap is used as ascending order is needed and the minimum element is always stored in the top.
+    // So every time you pop the minimum ele and store it, till the last k elements are left and they are the most value elements.
 
     priority_queue<int, vector<int>, greater<int>> pq;
 

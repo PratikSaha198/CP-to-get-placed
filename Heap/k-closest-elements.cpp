@@ -8,6 +8,10 @@
 vector<int> findClosestElements(vector<int>& arr, int k, int x)
 {
     vector<int> ans;
+
+    // Max heap is neeeded as the absolute difference is stored and the maximum diff ones are accessed from top and popped.
+    // Thus the end the minimum diff, k number of elements remain.
+
     priority_queue<pair<int, int>> pq;
 
     for(auto it : arr)

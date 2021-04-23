@@ -16,6 +16,9 @@ vector<int> topKFrequent(vector<int>& nums, int k)
     for(auto it : nums)
         m[it]++;
     
+    // A min heap is needed as the minimum frequency element is at the top and its constantly being deleted.
+    // At the end the k most frequency ones remain.
+
     priority_queue<p, vector<p>, greater<p>> pq;
     
     for(auto it : m)

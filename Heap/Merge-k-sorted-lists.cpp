@@ -9,16 +9,28 @@
 
 // Use a min heap to always store the least element in the top and keep on traversing by inserting the next node
 
-struct compare{
-    bool operator()(const ListNode* l, const ListNode* r)
-    {
-        return l->val > r->val;
-    }
-};
+
+// One way of COMPARATOR FUNCTION --------------------------->
+
+// struct compare{
+//     bool operator()(const ListNode* l, const ListNode* r)
+//     {
+//         return l->val > r->val;
+//     }
+// };
+
+// ---------------------------------------------------------->
 
 ListNode* mergeKLists(vector<ListNode*>& lists)
 {
-    priority_queue<ListNode *, vector<ListNode *>, compare> pq; // IMPORTANT COMPARATOR FUNCTION
+    // priority_queue<ListNode *, vector<ListNode *>, compare> pq; // IMPORTANT COMPARATOR FUNCTION (ABOVE COMP used)
+ 
+    auto comp = [&](const ListNode* l, const ListNode* r){
+            return l->val > r->val;
+    };
+    
+    // Max heap according to first value of a LL
+    priority_queue<ListNode *, vector<ListNode *>, decltype(comp)> pq(comp);
 
     for(auto it : lists){
         if(it) pq.push(it);
@@ -27,14 +39,18 @@ ListNode* mergeKLists(vector<ListNode*>& lists)
     if(pq.empty())
         return NULL;
     
+    // Take in the highest valued node
     ListNode* result = pq.top();
     pq.pop();
     
+    // Add into the queue the next element into that list if it exists
     if(result->next)
         pq.push(result->next);
     
+    // Make a pointer to the result which will move
     ListNode* tail = result;
-    
+
+    // Keep on adding and moving    
     while(!pq.empty())
     {
         tail->next = pq.top();

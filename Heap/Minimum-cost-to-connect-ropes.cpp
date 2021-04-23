@@ -21,17 +21,23 @@ using namespace std;
 int main(){
 
     vector<int> ropes{8, 4, 6, 12};
+
+    // Min heap needed as the top stores the minimum element, and we choose the top 2 lowest ones (for optimal)
     priority_queue<int, vector<int>, greater<int>> pq;
 
     for(auto it : ropes) pq.push(it);
 
     int ans = 0;
+
+    // If only the size is greater than equal to 2 then, 2 elements can be popped in one iteration.
     while(pq.size()>=2){
         int f = pq.top();
         pq.pop();
         int s = pq.top();
         pq.pop();
         ans+=f+s;
+
+        // Add the 2 lowest value popped elements sum to the queue
         pq.push(f+s);
     }
 
