@@ -22,7 +22,7 @@ int minssd(int arr[], int n){
     for(int i=0;i<n;i++)
         sum+=arr[i];
     
-    int dp[n+1][sum+1];
+    bool dp[n+1][sum+1];
     
     for(int i=0;i<=n;i++)
         dp[i][0]=true;
@@ -41,6 +41,11 @@ int minssd(int arr[], int n){
     
     int mini = INT_MAX;
     
+    // 2 seperate subset sums have to be formed and you have to find the min difference possible.
+    // Minimum differnece is possible is both the sums are as cloase to each other as possible
+
+    // Therefore form the subset sum, bool 2D matrix and in the last row where all elements are available
+    // Check from just lesser than half tyhe total SUM, that is the answer after SUM-2*j
     for(int j=sum/2;j>=0;j--){
         if(dp[n][j]==true){
             mini = sum - 2*j;

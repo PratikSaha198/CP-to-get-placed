@@ -15,6 +15,9 @@ using namespace std;
 // Just by placing positive or negative signs on each element how many ways can you get subsets with given difference.
 // Diff + Sum = 2*j -> so you have to just have to find Count of SubsetSum of j.
 
+// TC : O(n * (sum-diff)/2)
+// SC : O(n * (sum-diff)/2)
+
 
 int cgssd(int arr[], int diff, int n){
 
@@ -43,6 +46,39 @@ int cgssd(int arr[], int diff, int n){
     
     return dp[n][s];
     
+}
+
+
+// j = (SUM-diff)/2
+
+int targetsum(vector<int> nums, int diff, int n)
+{
+    int sum=0;
+
+    for(auto it : nums) sum+=it;
+
+    // EDGE CASES
+    if(diff>sum) return 0;
+    if((sum-diff)%2!=0) return 0;
+
+    int s = (sum-diff)/2;
+    
+    int dp[n+1][n+1];
+    
+    for(int j=0;j<=n;j++)
+        dp[0][j]=0;
+    
+    for(int i=0;i<=n;i++)
+        dp[i][0]=1;
+    
+    for(int i=1;i<=n;i++){
+        for(int j=0;j<=s;j++){
+            if(nums[i-1]<=j) 
+                dp[i][j]=dp[i-1][j-nums[i-1]]+dp[i-1][j];
+            else dp[i][j]=dp[i-1][j];
+        }
+    }
+    return dp[n][s];
 }
 
 int main(){

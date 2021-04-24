@@ -17,9 +17,12 @@ using namespace std;
 // Each bottom cornermost element is the answer of that weight.
 // The final column is the given W and is the answer asked. 
 
+// TC : O(n * W)
+// SC : O(n * W)
 
 int kp(int wei[], int val[], int W, int n){
     
+    // Memorisation table is derived from the recursive step
     int dp[n+1][W+1];
     
     for(int i=0;i<=n;i++){
@@ -28,6 +31,7 @@ int kp(int wei[], int val[], int W, int n){
             if(i==0 || j==0)    
                 dp[i][j]=0;
              
+            // The j part now stores the amount of weight left, so wei[i-1]<=j is the checker
             else if(wei[i-1]<=j)
                 dp[i][j] = max(val[i-1] + dp[i-1][j-wei[i-1]], dp[i-1][j]);
                 

@@ -28,6 +28,7 @@ int ubks(int wei[], int val[], int W, int n){
             if(i==0 || j==0)
                 dp[i][j] = 0;
                 
+            // If you are choosing an element then you have the option of choosing it again, so dont decrease the count, else decrease.
             else if(wei[i-1]<=j)
                 dp[i][j]=max(val[i-1]+dp[i][j-wei[i-1]], dp[i-1][j]);
             
@@ -44,6 +45,7 @@ int main(){
 
 	fast
     
+    // Same as knapsack, but you have the option of choosing the same element more than once.
     int wei[] = { 1, 50 };
     int val[] = { 1, 30 };
     int N = 2;

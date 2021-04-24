@@ -42,6 +42,7 @@ int main(){
 
 	fast
     
+    // Unbounded KS, just every length has length's value, which is given and you have to make an array of lengths
     int val[] = { 1, 5, 8, 9, 10, 17, 17, 20 };
     int len = 8;
     int pie[8];

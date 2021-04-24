@@ -37,6 +37,9 @@ bool ss(int arr[], int sum, int n){
     return dp[n][sum];
 }
 
+// Check for even sum, if not even then cant be formed
+// If yes, then check if the half of SUM can be formed using normal sumbet sum method.
+
 bool ess(int arr[], int n){
     int sum=0;
     for(int i=0;i<n;i++)
@@ -51,6 +54,8 @@ int main(){
 
 	fast
     
+    // Given an array return true or false if two equal sum subsets can be formed
+ 
     int arr[] = { 1, 5, 11, 5 }; 
     int n = sizeof(arr) / sizeof(arr[0]); 
     cout << ess(arr, n); 

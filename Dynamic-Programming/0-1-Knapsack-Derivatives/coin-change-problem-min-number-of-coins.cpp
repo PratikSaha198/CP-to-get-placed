@@ -24,12 +24,15 @@ int ccpmnoc(int arr[], int sum, int n){
     
     int dp[n+1][sum+1];
     
+    // If sum is 0, then 0 number of coins are needed.
     for(int i=1;i<=n;i++)
         dp[i][0]=0;
     
+    // If no coins are present then, infinitely many number of coins are needed.
     for(int j=0;j<=sum;j++)
         dp[0][j]=INT_MAX-1;
         
+    // If one coin is present, then if that that coin is divisible then sum/coin number of coins are required, arr[0] contains the 1 element.
     for(int j=1;j<=sum;j++){        
         if(j%arr[0]==0)
             dp[1][j]=j/arr[0];

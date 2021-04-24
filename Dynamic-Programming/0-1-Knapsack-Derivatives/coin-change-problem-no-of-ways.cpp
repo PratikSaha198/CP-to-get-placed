@@ -10,7 +10,7 @@
 using namespace std;
 
 
-// Given a few donmination of coins and a SUM, find number of ways to use multiple of number times any of them to combine them to it.
+// Given a few denmination of coins and a SUM, find number of ways to use multiple of number times any of them to combine them to it.
 // Multiple times choosing so unbounded knapsack derivative.
 // Essentially count of subset set sum problem with just dp[i-1][] -> dp[i][] change.
 
@@ -25,6 +25,7 @@ int ccpnow(int arr[], int sum, int n){
     for(int j=1;j<=sum;j++)
         dp[0][j]=0;
         
+    // Unbounded Knapsack, you have got the option of choosing the same element more than more, so, not decreasing its count after choosing it.
     for(int i=1;i<=n;i++){
         for(int j=1;j<=sum;j++){
             if(arr[i-1]<=j)
