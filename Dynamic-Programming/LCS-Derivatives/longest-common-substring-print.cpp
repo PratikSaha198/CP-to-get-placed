@@ -14,9 +14,13 @@ using namespace std;
 // But keep track of the indexs of the max length substring result.
 // After table move diagonally adding to the string till any of them reach i==0 || j==0 where dp[i][j]==0
 
+// TC : O(m * n)
+// SC : O(m * n)
+
 
 void lcss(string X, string Y, int m, int n)
 {   
+    // Keep track of the last index of the matching of both
     int result = 0, r, c;
     int dp[m + 1][n + 1];
 
@@ -47,6 +51,7 @@ void lcss(string X, string Y, int m, int n)
     else{
         string answer;
         
+        // The answer isnt skipping one index and moving to another, thus equally you are moving diagonally till the 0 is reached.
         while(dp[r][c]!=0){
             answer.push_back(X[r-1]);
             r--;

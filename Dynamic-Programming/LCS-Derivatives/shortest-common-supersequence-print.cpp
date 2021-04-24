@@ -16,6 +16,9 @@ using namespace std;
 // But here when either becomes 0, still the rest characters of the string whose length has become 0 has to be included.
 // So both the loops are provided to add rest charcters, maybe either of them run, or none.
 
+// TC : O(m * n)
+// SC : O(m * n)
+
 
 void print_SCSS(char X[], char Y[], int m, int n)
 {

@@ -16,6 +16,9 @@ using namespace std;
 // Answer -> len(A) - lcs : DELETION
 //           len(B) - lcs : INSERTION
 
+// TC : O(m * n)
+// SC : O(m * n)
+
 
 int lcs(char X[], char Y[], int m, int n)
 {

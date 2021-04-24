@@ -15,6 +15,9 @@ using namespace std;
 // If one by one matching contnuies, then increase answer by 1, else return ans into 0 and again inc/dec ing.
 // Store the max() of the length matching subtrings.
 
+// TC : O(m * n)
+// SC : O(m * n)
+
 
 int LCSubStr(char X[], char Y[], int m, int n)
 {
@@ -29,11 +32,14 @@ int LCSubStr(char X[], char Y[], int m, int n)
                 dp[i][j] = 0;
 
             else if (X[i - 1] == Y[j - 1])
-            {
+            {   
+                // As it  is not that the bottom dp table ele, which contains the whole ogf both the strings contain the lcsubstring thus maximum has to be kept
+                // The end of both the strings may not be the longest substring, thus do so
                 dp[i][j] = 1 + dp[i - 1][j - 1];
                 ans = max(ans, dp[i][j]);
             }
 
+            // You cant search for the rest part of another, as it has to be continuous
             else
                 dp[i][j] = 0;
         }

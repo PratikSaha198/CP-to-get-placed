@@ -14,6 +14,8 @@ using namespace std;
 // answer for X of length i and Y of length j. 
 // Hence bottom right corner element gives full length of both's answer.
 
+// TC : O(m * n)
+// SC : O(m * n)
 
 int lcs(char X[], char Y[], int m, int n)
 {   

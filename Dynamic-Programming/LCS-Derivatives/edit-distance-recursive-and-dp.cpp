@@ -18,6 +18,9 @@ using namespace std;
 // If last element of both strings are same then do nothing, just decrease both of its length.
 // Else consider all operations insert, remove, replace take minimum and add 1.
 
+// TC : O(3^n)
+// SC : O(1)
+
 
 int editDist_recur(string a, string b, int m, int n)
 {
@@ -27,14 +30,20 @@ int editDist_recur(string a, string b, int m, int n)
     if (n == 0)
         return m;
 
+    // You have to do nothing if both are same
     if (a[m - 1] == b[n - 1])
         return editDist_recur(a, b, m - 1, n - 1);
 
+    // If different then you have the 3 option, and do the min, and add 1 to count of operations
     else
         return 1 + min({editDist_recur(a, b, m, n - 1), // insert
                         editDist_recur(a, b, m - 1, n), // remove
                         editDist_recur(a, b, m - 1, n - 1)}); // replace
 }
+
+// TC : O(m * n)
+// SC : O(m * n)
+
 
 int editDist_dp(string a, string b, int m, int n)
 {

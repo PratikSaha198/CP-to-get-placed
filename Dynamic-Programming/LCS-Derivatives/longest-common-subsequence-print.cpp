@@ -20,6 +20,7 @@ using namespace std;
 
 void print_LCS(char X[], char Y[], int m, int n)
 {
+    // Make th normal dp table
     int dp[m + 1][n + 1];
 
     for (int i = 0; i <= m; i++)
@@ -36,6 +37,9 @@ void print_LCS(char X[], char Y[], int m, int n)
                 dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
         }
     }
+
+    // As the last element contains the answer, thus move backwards from it, as keeping on checking if both are same
+    // Else if not same, check which is greater and move towards it
 
     int i = m, j = n;
     vector<char> s;
@@ -57,6 +61,7 @@ void print_LCS(char X[], char Y[], int m, int n)
         }
     }
 
+    // As the string is generated backwards up, thus reverse it
     reverse(s.begin(), s.end());
 
     for (auto it : s)

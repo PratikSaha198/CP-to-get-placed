@@ -26,6 +26,7 @@ int lrs_length(string X, string Y, int m, int n)
             if (i == 0 || j == 0)
                 dp[i][j] = 0;
 
+            // If not in the same position so i!=j condition
             else if (X[i - 1] == Y[j - 1] && i != j)
                 dp[i][j] = 1 + dp[i - 1][j - 1];
 

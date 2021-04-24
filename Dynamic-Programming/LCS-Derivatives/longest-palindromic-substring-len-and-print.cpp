@@ -13,6 +13,11 @@ string lpsub(string X, string Y, int m, int n)
             else if (X[i - 1] == Y[j - 1])
             {
                 dp[i][j] = 1 + dp[i - 1][j - 1];
+                
+                // The maximum needs to be stored and its has be continous so
+                // Check if the current string is a palindrome, if yes then the curr max 'result' is assaigned to it.
+                // And the answer is updated.
+                
                 if (result < dp[i][j])
                 {
                     string temp = X.substr(i - dp[i][j], dp[i][j]);

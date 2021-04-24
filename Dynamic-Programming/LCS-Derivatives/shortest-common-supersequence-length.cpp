@@ -16,6 +16,9 @@ using namespace std;
 //             m + n (WORST CASE) (longest)
 // In the merged supersequence both the strings subsequence should be present.
 
+// TC : O(m * n)
+// SC : O(m * n)
+
 
 int lcs(char X[], char Y[], int m, int n)
 {
@@ -44,11 +47,13 @@ int main()
 
     fast
 
+    // Shortest common supersequence means, both the strings togther are there and a subsequence thing is gonna happen.
     char X[] = "AGGTAB";
     char Y[] = "GXTXAYB";
     int m = strlen(X);
     int n = strlen(Y);
 
+    // Adding both the strings len and deleting the lcs does the job
     cout << m + n - lcs(X, Y, m, n);
 
     return 0;

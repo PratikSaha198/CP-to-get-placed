@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 // Subsequence -> elements doesn't have to be one after the other, just have to be in order.
 // Sustring -> elements have to be contiguious.
 // Given two strings -> output the lcs (number)
@@ -19,6 +18,8 @@ using namespace std;
 // Else if not same, either choose last element in 1st string and look for match in whole of 2nd, or vice versa.
 // Longest common is required so max() function is used. 
 
+// TC : O(2^n)
+// SC : 1
 
 int lcs(char X[], char Y[], int m, int n)
 {
