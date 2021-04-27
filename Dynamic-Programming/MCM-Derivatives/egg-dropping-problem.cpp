@@ -16,7 +16,7 @@ using namespace std;
 //      If only 1 egg is given then we would need to try all the floors to find out.
 // We have got 2 options the egg breaks or not breaks when we drop it from a floor. 
 // We go from kth : floor 1 to f-1 floor.
-// If the egg does break we check the above f-k floors and keep the number of eggs the same, else we reduce the eggs by 1 and reduce the floors by one.
+// If the egg does not break we check the above f-k floors and keep the number of eggs the same, else we reduce the eggs by 1 and reduce the floors by one.
 
 // Memorised version is same, make a DP table and check if it has value -1 or not, if not do the normal.
 
@@ -67,6 +67,7 @@ int edpr_memo(int e, int f)
 {
     if (f == 0 || f == 1)
         return f;
+        
     if (e == 1)
         return f;
 
