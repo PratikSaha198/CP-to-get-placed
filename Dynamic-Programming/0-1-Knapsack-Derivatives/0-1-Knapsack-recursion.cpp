@@ -31,7 +31,7 @@ int kp(int wei[], int val[], int W, int n){
         return max(val[n-1] + kp(wei, val, W-wei[n-1], n-1), kp(wei, val, W, n-1));
 
     // If the current weight is more than AVAILBLE then just move on to next one.
-    else if(wei[n-1]>W)
+    else
         return kp(wei, val, W, n-1);
 }
 
