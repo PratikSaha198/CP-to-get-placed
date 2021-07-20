@@ -25,47 +25,26 @@ void DFS(int u, vector<int> adj[], vector<int> &visited){
 bool isConnected(int V, vector<int> adj[]){
     vector<int> visited(V, false);
     
-    int i;
-    for(i=0;i<V;i++){
-        if(adj[i].size()!=0) break;
-    }
-
-    // EDGE CASE, where there are no edges in the graph
-    if(i==V) return false;
-
-    DFS(i, adj, visited);
-
-    // Check if all the non-zero degree vertices are visited
-    for(i=0;i<V;i++){
-        if(visited[i]==false && adj[i].size()>0) return false;
-    }
-
-    return true;
+    
 }
 
 void isEulerain(int V, vector<int> adj[]){
 
-    // Check if all non-zero degree vertice are connected
-    if(!isConnected(V, adj)){
-        cout<<"NOT CONNECTED THEREFORE, NOT ANY TYPE OF EULERIAN";
-    }  
-    else{
+    // Check if Strongly Connected
+    if(!isSC(V, adj)) cout<<"NOT EULERIAN";
+    
+    vector<int> in(V, 0), out(V, 0);
 
-        // Store the degree
-        vector<int> degree;
-        for(int i=0;i<V;i++){
-            int si = adj[i].size();
-            degree.push_back(si);
+    for(int i=0;i<V;i++){
+        out[i]+=adj[i].size();
+        for(auto it : adj[i]){
+            in[it]++;
         }
-
-        // Calculate number of vertices having ODD degrees
-        int odd = 0;
-        for(auto it : degree) if(it%2!=0) odd++;
-
-        if(odd>2) cout<<"NOT EULERIAN";
-        else if(odd == 2) cout<<"EULERIAN -> EULERIAN PATH";
-        else if(odd == 0) cout<<"EILERIAN -> EULERIAN CIRCUIT/CYCLE";
     }
+
+    for(int i=0;i<V;i++)
+        if(in[i] == out[i])
+
 }
 
 int main(){
@@ -80,6 +59,7 @@ int main(){
     addEdge(adj, 2, 1);
     addEdge(adj, 0, 3);
     addEdge(adj, 3, 4);
+    addEdge(adj, 4, 0);
 
     isEulerain(V, adj);
 		
