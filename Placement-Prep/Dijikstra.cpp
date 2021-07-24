@@ -62,6 +62,11 @@ int main(){
 
 	fast
 
+    // O(V + E*log(E))
+    // because
+    // the algorithm goes through all nodes in the graph and adds for each edge at most
+    // one distance to the priority queue.
+    
 	int V=9;
     vector<pair<int, int>> adj[V];
 

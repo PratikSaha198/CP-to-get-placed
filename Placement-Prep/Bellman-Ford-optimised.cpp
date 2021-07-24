@@ -18,36 +18,35 @@ void addEdge(vector<pair<int, int>> adj[], int u, int v ,int w){
 // also detects negative weight cycle
 void bellManFord(int V, vector<pair<int, int>> adj[], int sr){
 
-    // Step 1: Initialize distances from src to all other vertices
-    // as INFINITE
     vector<int> dist(V, INT_MAX);
+
+    // To check if a node is present in the queue or not
+    vector<int> there(V, 0);
+    
     dist[sr] = 0;
 
-    // Step 2: Relax all edges |V| - 1 times. A simple shortest
-    // path from src to any other vertex can have at-most |V| - 1
-    // edge
-    for(int i=1;i<=V-1;i++){
-        for(int u=0;u<V;u++){
-            for(auto it : adj[u]){
-                int v = it.first;
-                int weight = it.second;
-                if(dist[u]!=INT_MAX and dist[v]>dist[u]+weight)
-                    dist[v] = dist[u] + weight;
-            }
-        }
-    }
+    // Add the staritng node
+    queue<int> q;
+    q.push(sr);
 
-    // Step 3: check for negative-weight cycles.  The above step
-    // guarantees shortest distances if graph doesn't contain
-    // negative weight cycle.  If we get a shorter path, then there
-    // is a cycle.
-    for(int u=0;u<V;u++){
+    while(!q.empty()){
+        int u = q.front();
+        q.pop();
+
+        // Marking the popped node to be ot present in the queue
+        there[u] = 0;
+        
         for(auto it : adj[u]){
             int v = it.first;
             int weight = it.second;
             if(dist[u]!=INT_MAX and dist[v]>dist[u]+weight){
-                cout<<"NEGATIVE CYCLE";
-                return;
+                dist[v] = dist[u] + weight;
+
+                // If not present in queue then add it
+                if(!there[v]){
+                    q.push(v);
+                    there[v] = 1;
+                }
             }
         }
     }
@@ -60,7 +59,10 @@ int main(){
 
 	fast
 
-    // O(E*V)
+    // Shortest Path Faster Algorithm 
+    // A variation of Bellman Ford but more efficient as it doesnt go through all the edges of each round
+    // But chooses the edges intelligently using a queue
+    // DOESNT WORK FOR CYCLE DETECTION
 
 	int V=5, E=8;
     vector<pair<int, int>> adj[V];
