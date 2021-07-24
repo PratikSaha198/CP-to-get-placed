@@ -57,7 +57,7 @@ void topoSort(int V, vector<int> adj[]){
         }
     }
 
-    if(!isthere) cout<<"CYCLE NOT PRESENT";
+    if(!isthere) cout<<"CYCLE NOT PRESENT"; 
 }
 
 int main(){

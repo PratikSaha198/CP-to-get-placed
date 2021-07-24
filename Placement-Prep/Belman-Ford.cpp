@@ -13,25 +13,47 @@ void addEdge(vector<pair<int, int>> adj[], int u, int v ,int w){
     adj[u].push_back({v, w});
 }
 
+// The main function that finds shortest distances from src to
+// all other vertices using Bellman-Ford algorithm.  The function
+// also detects negative weight cycle
 void bellManFord(int V, vector<pair<int, int>> adj[], int sr){
+
+    // Step 1: Initialize distances from src to all other vertices
+    // as INFINITE
     vector<int> dist(V, INT_MAX);
     dist[sr] = 0;
-    
-    for(int u=1;u<=V-1;i++){
-        for(int i=0;i<adj[u].size();i++){
-            int v = adj[u][i].first;
-            int weight = adj[u][i].second;
-            if(dist[v]>dist[u]+weight and dist[v]!=INT_MAX)
-                dist[v] = dist[u]+weight;
+
+    // Step 2: Relax all edges |V| - 1 times. A simple shortest
+    // path from src to any other vertex can have at-most |V| - 1
+    // edge
+    for(int i=1;i<=V-1;i++){
+        for(int u=0;u<V;u++){
+            for(auto it : adj[u]){
+                int v = it.first;
+                int weight = it.second;
+                if(dist[u]!=INT_MAX and dist[v]>dist[u]+weight)
+                    dist[v] = dist[u] + weight;
+            }
         }
     }
 
-    for(int i=0;i<adj[u].size();i++){
-        int v = adj[u][i].first;
-        int weight = adj[u][i].second;
-        if(dist[v]>dist[u]+weight and dist[v]!=INT_MAX)
-            
+    // Step 3: check for negative-weight cycles.  The above step
+    // guarantees shortest distances if graph doesn't contain
+    // negative weight cycle.  If we get a shorter path, then there
+    // is a cycle.
+    for(int u=0;u<V;u++){
+        for(auto it : adj[u]){
+            int v = it.first;
+            int weight = it.second;
+            if(dist[u]!=INT_MAX and dist[v]>dist[u]+weight){
+                cout<<"NEGATIVE CYCLE";
+                return;
+            }
+        }
     }
+
+    // Print the distances
+    for(auto it : dist) cout<<it<<" ";
 }
 
 int main(){

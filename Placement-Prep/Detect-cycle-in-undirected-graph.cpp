@@ -11,6 +11,7 @@ using namespace std;
 
 void addEdge(vector<int> adj[], int u, int v){
     adj[u].push_back(v);
+    adj[v].push_back(u);
 }
 
 bool dfs(int u, vector<int> adj[], vector<int> &visited, int parent){
@@ -37,7 +38,8 @@ bool detect(int V, vector<int> adj[]){
     return false;
 
     // To find the node making it a cycle
-    // Keep on adding an edge one by one and test, if a cycle is being formed
+    // Keep on adding an edge one by one and test, 
+    // Check if there is a back edge to any if its nodes, then a cycle is being formed
     // If its being formed then the vertice before that was the culprit
 }
 
