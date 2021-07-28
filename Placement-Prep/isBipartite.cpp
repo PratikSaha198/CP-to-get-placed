@@ -11,7 +11,7 @@ using namespace std;
 
 void addEdge(vector<int> adj[], int u, int v){
     adj[u].push_back(v);
-    adj[v].push_back(u);
+    // adj[v].push_back(u);
 }
 
 bool dfs(int u, vector<int> adj[], vector<int> &visited, vector<int> &color){
@@ -41,28 +41,42 @@ bool isBipartite(int V, vector<int> adj[]){
     for(int i=0;i<V;i++){
         if(!visited[i]){
             if(dfs(i, adj, visited, color))
-                return true;
+                return false;
         }
     }
-    return false;
+    return true;
 }
 
 int main(){
 
 	fast
 
-    int V = 6;
+    // int V = 6;
+	// vector<int> adj[V];
+
+    // addEdge(adj, 0, 1);
+    // addEdge(adj, 1, 2);
+    // addEdge(adj, 2, 3);
+    // addEdge(adj, 3, 4);
+    // addEdge(adj, 4, 5);
+    // addEdge(adj, 5, 0);
+
+    int V = 5;
 	vector<int> adj[V];
 
+    addEdge(adj, 0, 4);
     addEdge(adj, 0, 1);
+    addEdge(adj, 1, 0);
     addEdge(adj, 1, 2);
+    addEdge(adj, 2, 1);
     addEdge(adj, 2, 3);
+    addEdge(adj, 3, 2);
     addEdge(adj, 3, 4);
-    addEdge(adj, 4, 5);
-    addEdge(adj, 5, 0);
+    addEdge(adj, 4, 3);
+    addEdge(adj, 4, 0);
 
-    if(!isBipartite(V, adj)) cout<<"YES";
-    else cout<<"NO";
+    if(isBipartite(V, adj)) cout<<"YES";
+    else cout<<"NO";    
 
     return 0;
 }

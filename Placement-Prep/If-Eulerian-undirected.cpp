@@ -64,13 +64,16 @@ void isEulerain(int V, vector<int> adj[]){
 
         if(odd>2) cout<<"NOT EULERIAN";
         else if(odd == 2) cout<<"EULERIAN -> EULERIAN PATH";
-        else if(odd == 0) cout<<"EILERIAN -> EULERIAN CIRCUIT/CYCLE";
+        else if(odd == 0) cout<<"EULERIAN -> EULERIAN CIRCUIT/CYCLE";
     }
 }
 
 int main(){
 
 	fast
+
+    // Eulerian Path is a path in graph that visits every edge exactly once.
+    // Eulerian Circuit is an Eulerian Path which starts and ends on the same vertex.
 
     int V=5;
     vector<int> adj[V];

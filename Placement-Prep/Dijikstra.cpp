@@ -62,7 +62,7 @@ int main(){
 
 	fast
 
-    // O(V + E*log(E))
+    // O(V + E*log(V))
     // because
     // the algorithm goes through all nodes in the graph and adds for each edge at most
     // one distance to the priority queue.

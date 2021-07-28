@@ -21,6 +21,9 @@ bool dfs(int u, vector<int> adj[], vector<int> &visited, int parent){
             if(dfs(adj[u][i], adj, visited, u))
                 return true;
         }
+        // If an adjacent vertex is visited and
+        // is not parent of current vertex,
+        // then there exists a cycle in the graph.
         else if(adj[u][i]!=parent) 
             return true;
     }

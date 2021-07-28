@@ -39,5 +39,6 @@ vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         if(!solve(i, graph, visited, path))
             ans.push_back(i);
     }
+    
     return ans;
 }

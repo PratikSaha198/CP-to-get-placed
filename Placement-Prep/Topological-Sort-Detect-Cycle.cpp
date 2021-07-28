@@ -64,18 +64,29 @@ int main(){
 
 	fast
 
-    int V=5;
+    // int V=5;
+    // vector<int> adj[V];
+
+    // addEdge(adj, 1, 2);
+    // addEdge(adj, 2, 3);
+    // addEdge(adj, 3, 4);
+    // addEdge(adj, 1, 4);
+    // addEdge(adj, 1, 5);
+
+    int V=4;
     vector<int> adj[V];
 
-    addEdge(adj, 1, 2);
     addEdge(adj, 2, 3);
-    addEdge(adj, 3, 4);
-    addEdge(adj, 1, 4);
-    addEdge(adj, 1, 5);
+    addEdge(adj, 2, 1);
+    addEdge(adj, 0, 3);
+    addEdge(adj, 0, 1);
+    // addEdge(adj, 1, 5);
 
     // In Topological Sort, the idea is to visit the parent node followed by the child node. 
     // If the given graph contains a cycle, then there is at least one node which is a parent as well as a child so this will break Topological Order.
     // Therefore, after the topological sort, check for every directed edge whether it follows the order or not.
+
+    // O(E + V)
 
     topoSort(V, adj);
 		

@@ -11,7 +11,6 @@ using namespace std;
 
 void addEdge(vector<int> adj[], int u, int v){
     adj[u].push_back(v);
-    adj[v].push_back(u);
 }
 
 void DFS(int u, vector<int> adj[], vector<int> &visited){
@@ -22,16 +21,63 @@ void DFS(int u, vector<int> adj[], vector<int> &visited){
     }
 }
 
-bool isConnected(int V, vector<int> adj[]){
+bool isDisconnected(int V, vector<int> adj[]){
     vector<int> visited(V, false);
-    
-    
+
+    int i;
+    for(i=0;i<V;i++){
+        if(adj[i].size()>0){
+            break;
+        }
+    }
+
+    DFS(i, adj, visited);
+
+    for(int i=0;i<V;i++){
+        if(!visited[i] and adj[i].size()>0) return true;
+    }
+
+    return false;
+}
+
+void transpose(int V, vector<int> adj[], vector<int> tra[]){
+    for(int i=0;i<V;i++){
+        for(auto it : adj[i]){
+            tra[it].push_back(i);
+        }
+    }
+}
+
+bool hasONEComponent(int V, vector<int> adj[]){
+
+    vector<int> visited(V, false);
+    DFS(0, adj, visited);
+
+    for(int i=0;i<V;i++) visited[i]=false;
+
+    vector<int> trans[V];
+    transpose(V, adj, trans);
+
+    DFS(0, trans, visited);
+
+    for(int i=0;i<V;i++){
+        if(!visited[i])
+            return false;
+    }
+
+    return true;
 }
 
 void isEulerain(int V, vector<int> adj[]){
 
-    // Check if Strongly Connected
-    if(!isSC(V, adj)) cout<<"NOT EULERIAN";
+    // Check if disconnected or not
+    if(isDisconnected(V, adj)){
+        cout<<"DISCONNECTED, so NOT EULERIAN";
+        return;
+    }
+
+    // Check if doesn't even have a chance of becoming eucler circuit
+    if(!hasONEComponent(V, adj)) cout<<"DOESNT HAVE A CHANCE OF BECOMING A EULER CIRCUIT"<<endl;
     
     vector<int> in(V, 0), out(V, 0);
 
@@ -42,9 +88,18 @@ void isEulerain(int V, vector<int> adj[]){
         }
     }
 
-    for(int i=0;i<V;i++)
-        if(in[i] == out[i])
+    int cnt = 0;
 
+    for(int i=0;i<V;i++) cout<<i<<" : IN -> "<<in[i]<<" OUT -> "<<out[i]<<endl;
+
+    for(int i=0;i<V;i++)
+        if(in[i]!=out[i])
+            cnt++;
+
+    // Check if there are 2 nodes with uneven number of incoming and outgoing edges the its a eulrain path
+    if(cnt==0) cout<<"EULERIAN CYCLE";
+    else if(cnt==2) cout<<"EULERIAN PATH";
+    else cout<<"NOT EULERAIN";
 }
 
 int main(){
@@ -60,6 +115,14 @@ int main(){
     addEdge(adj, 0, 3);
     addEdge(adj, 3, 4);
     addEdge(adj, 4, 0);
+
+    // int V=5;
+    // vector<int> adj[V];
+
+    // addEdge(adj, 0, 1);
+    // addEdge(adj, 1, 2);
+    // addEdge(adj, 2, 3);
+    // addEdge(adj, 4, 4);
 
     isEulerain(V, adj);
 		
