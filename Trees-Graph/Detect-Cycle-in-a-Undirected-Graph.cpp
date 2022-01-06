@@ -56,7 +56,7 @@ int iscycle(vector<pair<int, int>> &v)
         unionit(pa, a, b);
     }
     return 0;
-}
+}nnnnnnn
 
 int main()
 {
